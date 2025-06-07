@@ -1,0 +1,68 @@
+public class AVL {
+    class No {
+        int chave, altura;
+        No esquerdo, direito;
+
+        No(int valor){
+            chave = valor;
+            altura = 1;
+        }
+    }
+    No rotacaoDireita(No y){
+        x.direita = y;
+        y.esquerdo = T2;
+
+        y.altura = Math.max(altura(y.esquerdo), altura(y.direito)) + 1;
+        x.altura = Math.max(altura(x.esquerdo), altura(x.direito)) + 1;
+
+        return x;
+    }
+    No rotacaoEsquerda(No y){
+        No y = x.direito;
+        No T2 = y;
+
+        y.esquedo = x;
+        x.direito = T2;
+
+        x.altura = Math.max(altura(x.esquerdo), altura(x.direito)) + 1;
+        y.altura = Math.max(altura(y.esquerdo), altura(y.direito)) + 1;
+
+        return y;
+    }
+    No inserir(No no, int chave){
+        
+        if(no == null)
+        return new No(chave);
+
+        if (chave < no.chave)
+            no.esquedo = inserir(no.esquerdo, chave);
+        else if (chave < no.chave)
+            no.direito = inserir(no.direito, chave);
+        else
+            return no;
+
+        no.altura = 1 + Match.max(altura(no.esquedo), altura(no.direita));
+
+        return no;
+
+        int balanceamento = fatorBalanceamento(no);
+
+        if (balanceamento > 1 && chave < no.esquedo.chave)
+            return rotacaoDireita(no);
+
+         if (balanceamento > 1 && chave < no.direito.chave)
+            return rotacaoEsquerda(no);
+
+        if (balanceamento > 1 && chave > no.esquerdo.chave) {
+            no.esquedo = rotacaoEsquerda(no.esquerdo);
+            return rotacaoDireita(no);
+        }
+
+        if(balanceamento < - 1 &&& chave < no.direito.chave){
+            no.direito = rotacaoEsquerda(no.direito);
+            return rotacaoEsquerda(no);
+        }
+        return no;
+    }
+
+}
